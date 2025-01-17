@@ -10,7 +10,7 @@ from air_purifier import main_purifier, turn_on, turn_off, high_purifier, low_pu
 from basic_func import get_country
 from intents import INTENTS_LIST, INSTRUCTIONS
 
-from led_lamp import asyncio_turnon, asyncio_turnoff
+from led_lamp import asyncio_turnon, asyncio_turnoff, connect_sync
 
 VOICE = "en-GB-SoniaNeural"
 OUTPUT_FILE = "temp-speech.mp3"
@@ -130,8 +130,12 @@ def success_message(success_msg: str):
     print(f"GPT Message: {success_reply}")
     asyncio.run(speak_response(success_reply))
 
+def pre_setup():
+    print("Setting up connection for quick access")
+    connect_sync()
 
 if __name__ == "__main__":
+    pre_setup()
     api_key = load_api_key()
     if api_key:
         client = initialize_client(api_key)

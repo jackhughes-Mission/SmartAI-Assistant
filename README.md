@@ -12,7 +12,7 @@ The Smart Home Assistant is a smart program that utilises the OpenAI API along w
 To run this project, ensure you have the following installed:
 - Python 3.x
 - Required packages (install via `pip install -r requirements.txt`)
-- If your python version doesn't work, use 3.11. I created a virtual environment with 3.11.
+- If your python version doesn't work, use 3.11.
 
 ## Installation
 1. Clone the repository:
@@ -32,6 +32,10 @@ To run this project, ensure you have the following installed:
    ```bash
    pip install -r requirements.txt
    ```
+5. Add your OpenAI API key to the .env file.
+   ```bash
+   OPENAI_API_KEY=your_api_key
+   ```
 
 ## Usage
 Run the program using:
@@ -39,12 +43,15 @@ Run the program using:
 python main.py
 ```
 
-## Acknowledgments
-- OpenAI for providing the API.
-- EdgeTTS for providing the TTS functionality.
-- Bleak for providing the BLE functionality.
-- SpeechRecognition for providing the STT functionality.
-- Pyttsx3 for providing the TTS functionality.
-- PyAudio for providing the audio functionality.
-- Pytz for providing the time functionality.
-- dotenv for providing the environment variables.
+## Requirements in detail
+- OpenAI for providing the chatgpt conversation functionality.
+- EdgeTTS for providing the real sounding TTS.
+- Bleak for providing the bluetooth scanning and control.
+- SpeechRecognition for providing the STT.
+- Pygame for providing the audio functionality.
+- Pytz for providing access to the time.
+- Dotenv for providing the environment variables.
+- Asyncio for providing the async functionality.
+- Pyvesync for providing access to the air purifier.
+- Keyring for providing password storage.
+- Fuzzywuzzy for providing the fuzzy matching functionality.

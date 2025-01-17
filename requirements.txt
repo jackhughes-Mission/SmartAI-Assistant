@@ -1,11 +1,7 @@
 SpeechRecognition
 openai
-pyttsx3
 python-dotenv
-pyttsx4
-pydub
 pygame
-pyaudio
 edge_tts
 keyring
 pyvesync

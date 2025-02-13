@@ -8,3 +8,4 @@ pyvesync
 fuzzywuzzy[speedup]
 pytz
 bleak
+paramiko

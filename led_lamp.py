@@ -78,9 +78,11 @@ def connect_sync():
     loop.run_until_complete(connect())
 
 def asyncio_turnon():
-    loop = asyncio.get_event_loop()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
     loop.run_until_complete(turn_on())
 
 def asyncio_turnoff():
-    loop = asyncio.get_event_loop()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
     loop.run_until_complete(turn_off())

@@ -11,6 +11,7 @@ from basic_func import get_country
 from intents import INTENTS_LIST, INSTRUCTIONS
 
 from led_lamp import asyncio_turnon, asyncio_turnoff, connect_sync
+from rasp_pi import connect_to_rasp_pi, connect_to_rasp_pi_async
 
 VOICE = "en-GB-SoniaNeural"
 OUTPUT_FILE = "temp-speech.mp3"
@@ -96,6 +97,30 @@ def turn_off_led_light():
     asyncio_turnoff()
     success_message("generate a success message for turning off the led light")
 
+def connect_to_rasp():
+    try:
+        pi_output = connect_to_rasp_pi()
+        
+        if "Connection failed" in pi_output or "Error" in pi_output:
+            print(f"Connection error: {pi_output}")
+            asyncio.run(speak_response(f"I'm sorry, but {pi_output}"))
+            return
+        
+        prompt = f"""
+        Please summarize the important information from this Raspberry Pi fail2ban status output in a clear, 
+        conversational way. Focus on the key details that a user would want to know:
+
+        {pi_output}
+        """
+
+        summary = chat_gpt(client, prompt)
+        print(f"GPT Summary: {summary}")
+        
+        asyncio.run(speak_response(summary))
+    except Exception as e:
+        error_msg = f"I'm sorry Jack, but I encountered an error: {str(e)}"
+        print(error_msg)
+        asyncio.run(speak_response(error_msg))
 
 def listen_for_input():
     recognizer = sr.Recognizer()
@@ -160,6 +185,8 @@ if __name__ == "__main__":
                     turn_on_led_light()
                 elif intent == "turn_off_led_light":
                     turn_off_led_light()
+                elif intent == "connect_to_rasp":
+                    connect_to_rasp()
                 else:
                     response = chat_gpt(client, spoken_text)
                     print(f"GPT Response: {response}")
